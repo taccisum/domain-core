@@ -17,7 +17,9 @@ public abstract class ClassUtils {
     public static List<Class> listAllSuperClassesOf(Class clazz, boolean includeSelf) {
         List<Class> classes = new ArrayList<>();
         Class cls = clazz;
-        classes.add(cls);
+        if (includeSelf) {
+            classes.add(cls);
+        }
         while (cls.getSuperclass() != null) {
             cls = cls.getSuperclass();
             classes.add(cls);
