@@ -35,14 +35,26 @@ public class SpringUtilsTest {
         assertThat(foo.bar1).isNull();
     }
 
+    @Test
+    public void injectSuperClass() {
+        SubFoo sub = new SubFoo();
+        SpringUtils.inject(sub);
+        assertThat(sub).isNotNull();
+        assertThat(sub.bar).isNotNull();
+        assertThat(sub.bar1).isNull();
+    }
+
 
     public static class Bar {
     }
 
     public static class Foo {
         @Autowired
-        private Bar bar;
-        private Bar bar1;
+        Bar bar;
+        Bar bar1;
+    }
+
+    public static class SubFoo extends Foo {
     }
 
 }

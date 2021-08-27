@@ -32,7 +32,8 @@ public abstract class SpringUtils {
      * @param obj 目标对象
      */
     public static void inject(Object obj) {
-        List<Field> autowiredFields = Arrays.stream(obj.getClass().getDeclaredFields())
+        List<Field> autowiredFields = ClassUtils.listAllSuperClassesOf(obj.getClass(), true).stream()
+                .flatMap(clazz -> Arrays.stream(clazz.getDeclaredFields()))
                 .filter(field -> AnnotationUtils.findAnnotation(field, Autowired.class) != null)
                 .collect(Collectors.toList());
 
@@ -50,5 +51,9 @@ public abstract class SpringUtils {
                 log.warn("Can't access field \"{}\" of object {}, because of: {}", field.getName(), obj.toString(), e.getMessage());
             }
         }
+    }
+
+    public static <T> T getBean(Class<T> clazz) {
+        return context.getBean(clazz);
     }
 }
