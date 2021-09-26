@@ -5,6 +5,18 @@ DDD with spring.
 [CHANGELOG](./CHANGELOG.md)
 
 
+## How to
+
+引入依赖
+
+```xml
+<dependency>
+    <groupId>com.github.taccisum</groupId>
+    <artifactId>ddd-core</artifactId>
+    <version>{latest-version}</version>
+</dependency>
+```
+
 ## References
 
 ### 为普通对象注入 bean
