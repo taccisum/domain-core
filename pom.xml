@@ -8,6 +8,30 @@
     <artifactId>domain-core</artifactId>
     <version>0.1</version>
 
+    <name>Domain Core</name>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://mit-license.org/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>taccisum</name>
+            <email>514162920@qq.com</email>
+            <url>https://taccisum.github.io</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/taccisum/domain-core</url>
+        <connection>https://github.com/taccisum/domain-core.git</connection>
+        <developerConnection>https://github.com/taccisum</developerConnection>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
