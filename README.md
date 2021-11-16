@@ -1,6 +1,6 @@
-# DDD Core
+# Domain Core
 
-DDD with spring.
+For DDD layer domain with spring.
 
 [CHANGELOG](./CHANGELOG.md)
 
@@ -12,7 +12,7 @@ DDD with spring.
 ```xml
 <dependency>
     <groupId>com.github.taccisum</groupId>
-    <artifactId>ddd-core</artifactId>
+    <artifactId>domain-core</artifactId>
     <version>{latest-version}</version>
 </dependency>
 ```

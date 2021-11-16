@@ -1,6 +1,6 @@
-package com.github.taccisum.ddd.core.utils;
+package com.github.taccisum.domain.core.utils;
 
-import com.github.taccisum.ddd.core.utils.SpringUtilsTest.Bar;
+import com.github.taccisum.domain.core.utils.SpringUtilsTest.Bar;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

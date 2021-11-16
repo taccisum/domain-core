@@ -1,4 +1,4 @@
-package com.github.taccisum.ddd.core.utils;
+package com.github.taccisum.domain.core.utils;
 
 import java.util.ArrayList;
 import java.util.List;
