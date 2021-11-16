@@ -9,6 +9,7 @@
     <version>0.1</version>
 
     <name>Domain Core</name>
+    <description>For DDD layer domain with spring.</description>
 
     <licenses>
         <license>
