@@ -4,6 +4,8 @@ For DDD layer domain with spring.
 
 [CHANGELOG](./CHANGELOG.md)
 
+[![Build Status](https://app.travis-ci.com/taccisum/domain-core.svg?branch=master)](https://app.travis-ci.com/taccisum/domain-core)
+[![codecov](https://codecov.io/gh/taccisum/domain-core/branch/main/graph/badge.svg?token=lCBxSWyiWU)](https://codecov.io/gh/taccisum/domain-core)
 
 ## How to
 
