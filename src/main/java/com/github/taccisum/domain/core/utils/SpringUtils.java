@@ -1,5 +1,6 @@
 package com.github.taccisum.domain.core.utils;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public abstract class SpringUtils {
+    @Getter
     private static ApplicationContext context;
 
     public static void setContext(ApplicationContext context) {
