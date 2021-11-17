@@ -21,6 +21,25 @@ For DDD layer domain with spring.
 
 ## References
 
+### 实体
+
+```java
+// define
+public class Foo extends Entity.Base<Long> {
+    public Foo(Long id) {
+        super(id);
+    }
+}
+```
+
+```java
+// use
+Foo foo = new Foo(1L)
+foo.id();
+foo.xxx();
+```
+
+
 ### 为普通对象注入 bean
 
 定义你的类，并使用标准 Spring 注解 `@Autowired`
