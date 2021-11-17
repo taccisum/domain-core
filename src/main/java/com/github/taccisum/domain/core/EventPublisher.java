@@ -18,9 +18,10 @@ public interface EventPublisher {
     void publish(Event event);
 
     @Slf4j
-    class Base implements EventPublisher {
+    class Base implements EventPublisher, EventBusAware {
         private EventBus eventBus;
 
+        @Override
         public void setEventBus(EventBus eventBus) {
             this.eventBus = eventBus;
         }

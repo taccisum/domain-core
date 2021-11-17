@@ -1,6 +1,5 @@
 package com.github.taccisum.domain.core.integration.domain;
 
-import com.github.taccisum.domain.core.utils.SpringUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,10 +7,8 @@ import org.springframework.stereotype.Component;
  * @since 2021-11-17
  */
 @Component
-public class Factory {
+public class Factory implements com.github.taccisum.domain.core.Factory {
     public Foo newFoo(Long id) {
-        Foo foo = new Foo(id);
-        SpringUtils.inject(foo);
-        return foo;
+        return new Foo(id);
     }
 }
