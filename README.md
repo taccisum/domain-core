@@ -45,7 +45,7 @@ foo.xxx();
 
 ### 领域事件
 
-实现接口 `Event` 以表示该类是一个实体。你也可以选择继承更方便的 `Event.Base`
+实现接口 `Event` 以表示该类是一个事件。你也可以选择继承更方便的 `Event.Base`
 
 ```java
 public class FooCreateEvent extends Event.Base<Foo> {
