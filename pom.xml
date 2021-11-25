@@ -6,7 +6,7 @@
 
     <groupId>com.github.taccisum</groupId>
     <artifactId>domain-core</artifactId>
-    <version>0.1</version>
+    <version>0.2.0</version>
 
     <name>Domain Core</name>
     <description>For DDD layer domain with spring.</description>
