@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.2.1 (2021-12-01)
+
+### Features
+
+* fix: missing pom.xm when deploy jar to maven central (8e3b93d)
+
 ## 0.2 (2021-11-25)
 
 ### Features
