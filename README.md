@@ -4,6 +4,7 @@ For DDD layer domain with spring.
 
 [CHANGELOG](./CHANGELOG.md)
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.taccisum/domain-core.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.taccisum%22%20AND%20a:%22domain-core%22)
 [![Build Status](https://app.travis-ci.com/taccisum/domain-core.svg?branch=master)](https://app.travis-ci.com/taccisum/domain-core)
 [![codecov](https://codecov.io/gh/taccisum/domain-core/branch/main/graph/badge.svg?token=lCBxSWyiWU)](https://codecov.io/gh/taccisum/domain-core)
 
