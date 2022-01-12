@@ -19,13 +19,13 @@ public class EventPublisherTest {
     public void index() {
         capture.reset();
         Pub pub = new Pub();
-        pub.setEventBus(event -> System.out.println("事件发布成功"));
+        pub.setEventBus(event -> System.out.println("event public success."));
         Event.Base<Pub> event = new Event.Base<Pub>() {
         };
         pub.publish(event);
 
         assertThat(event.getPublisher()).isEqualTo(pub);
-        capture.expect(containsString("事件发布成功"));
+        capture.expect(containsString("event public success."));
 
         // 发布不匹配的事件
         capture.reset();
@@ -33,7 +33,7 @@ public class EventPublisherTest {
         });
         // 告警，但仍可发布成功
         capture.expect(containsString("not matched event"));
-        capture.expect(containsString("事件发布成功"));
+        capture.expect(containsString("event public success."));
     }
 
     private static class Pub extends EventPublisher.Base {
