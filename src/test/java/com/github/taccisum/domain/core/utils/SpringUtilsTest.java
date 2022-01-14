@@ -9,6 +9,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.Resource;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -33,7 +35,9 @@ public class SpringUtilsTest {
         assertThat(foo).isNotNull();
         assertThat(foo.bar).isNotNull();
         assertThat(foo.bar1).isNull();
+        assertThat(foo.bar2).isNotNull();
     }
+
 
     @Test
     public void injectSuperClass() {
@@ -52,6 +56,8 @@ public class SpringUtilsTest {
         @Autowired
         Bar bar;
         Bar bar1;
+        @Resource
+        Bar bar2;
     }
 
     public static class SubFoo extends Foo {

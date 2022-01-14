@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.AnnotationUtils;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +37,10 @@ public abstract class SpringUtils {
     public static void inject(Object obj) {
         List<Field> autowiredFields = ClassUtils.listAllSuperClassesOf(obj.getClass(), true).stream()
                 .flatMap(clazz -> Arrays.stream(clazz.getDeclaredFields()))
-                .filter(field -> AnnotationUtils.findAnnotation(field, Autowired.class) != null)
+                .filter(field -> {
+                    return AnnotationUtils.findAnnotation(field, Autowired.class) != null ||
+                            AnnotationUtils.findAnnotation(field, Resource.class) != null;
+                })
                 .collect(Collectors.toList());
 
         for (Field field : autowiredFields) {
