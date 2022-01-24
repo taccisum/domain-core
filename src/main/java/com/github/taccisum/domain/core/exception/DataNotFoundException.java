@@ -9,6 +9,10 @@ import com.github.taccisum.domain.core.DomainException;
  * @since 0.3
  */
 public class DataNotFoundException extends DomainException {
+    public DataNotFoundException(String message) {
+        super(message);
+    }
+
     public DataNotFoundException(String key, Object id) {
         super("%s[%s]不存在", key, id);
     }
