@@ -139,7 +139,7 @@ public class MyFactory implements Factory {
 
 - 只作用于实现了 `Factory` 接口的类中定义的方法。
 - 为实现了接口 `EventBusAware` 的类自动注入 EventBus
-- 查找目标类及其父类中标注有 `@Autowired` 注解的字段，自动寻找到相应的 Spring Bean 进行注入
+- 查找目标类及其父类中标注有 `@Autowired` 或 `@Resource` 注解的字段，自动寻找到相应的 Spring Bean 进行注入
 
 
 #### 为普通对象注入 bean

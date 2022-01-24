@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3](https://github.com/taccisum/domain-core/compare/v0.2.1...v0.3) (2022-01-24)
+
+### Features
+
+* add constructor for DataNotFoundException ([e608794](https://github.com/taccisum/domain-core/commit/e608794108dcebfbf30814f32425e62823deb2f4))
+* provide common domain exceptions ([f387583](https://github.com/taccisum/domain-core/commit/f3875839a518ffae6d0155f5ad7db1bded00aff4))
+* support to inject bean for fields that annotated by @Resource ([82726da](https://github.com/taccisum/domain-core/commit/82726da182b1520477275c8f7fad7b9dc373abc6))
+
 ## 0.2.1 (2021-12-01)
 
 ### Features
