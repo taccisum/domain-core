@@ -23,12 +23,17 @@ public interface Entity<ID> {
         return this.getId();
     }
 
-    abstract class Base<ID> extends EventPublisher.Base implements Entity<ID> {
+    abstract class Base<ID> extends EventPublisher.Base implements Entity<ID>, DependenciesAware {
         @Getter
         private ID id;
 
         public Base(ID id) {
             this.id = id;
+        }
+
+        @Override
+        public void inject(DependenciesManager manager) {
+            // Nothing by default
         }
     }
 }
