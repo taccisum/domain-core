@@ -15,18 +15,18 @@ public interface Event<T extends EventPublisher> {
      *
      * @param publisher 发布者
      */
-    void setPublisher(T publisher);
+    void setPublisher(Object publisher);
 
     /**
      * 获取事件的发布者
      *
      * @return 此事件的发布者
      */
-    T getPublisher();
+    Object getPublisher();
 
     abstract class Base<T extends EventPublisher> implements Event<T> {
         @Setter
         @Getter
-        private T publisher;
+        private Object publisher;
     }
 }
