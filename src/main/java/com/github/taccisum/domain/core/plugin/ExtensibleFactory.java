@@ -18,7 +18,7 @@ import java.util.List;
  * @author taccisum - liaojinfeng@baidu.ac.com
  * @since 0.5
  */
-public abstract class ExtensibleFactory implements Factory {
+public class ExtensibleFactory implements Factory {
     private DependenciesManager dependenciesManager;
     private PluginManager pluginManager;
     private ApplicationContext applicationContext;
@@ -42,7 +42,7 @@ public abstract class ExtensibleFactory implements Factory {
      * @param criteria 匹配条件
      * @param type     实体工厂类型
      */
-    protected <ID extends Serializable, E extends Entity<ID>, C, F extends EntityFactory<ID, E, C>>
+    public <ID extends Serializable, E extends Entity<ID>, C, F extends EntityFactory<ID, E, C>>
     E create(ID id, C criteria, Class<F> type) {
         List<F> factories = new ArrayList<>();
         if (this.pluginManager != null) {
