@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @author taccisum - liaojinfeng@baidu.ac.com
- * @since 2023/11/2
+ * @since 0.5
  */
 public abstract class ExtensibleFactory implements Factory {
     private DependenciesManager dependenciesManager;

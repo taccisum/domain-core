@@ -13,7 +13,7 @@ import java.util.function.Function;
 
 /**
  * @author taccisum - liaojinfeng@baidu.ac.com
- * @since 2023/11/3
+ * @since 0.5
  */
 public abstract class BaseRepo<E extends Entity<?>, DO extends DataObject<?>> {
     /**
