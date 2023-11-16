@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @author taccisum - liaojinfeng@baidu.ac.com
@@ -81,11 +82,17 @@ public abstract class BaseRepo<E extends Entity<?>, DO extends DataObject<?>> {
     }
 
     public Optional<E> getBy(Function<DAO<? extends DO>, DO> queryOne) {
-        throw new RuntimeException("not impl");
+        if (queryOne == null) return Optional.empty();
+        DO data = queryOne.apply(this.dao);
+        if (data == null) return Optional.empty();
+        return Optional.of(this.toEntity(data));
     }
 
     public List<E> queryBy(Function<DAO<? extends DO>, List<DO>> query) {
-        throw new RuntimeException("not impl");
+        List<DO> rows = query == null ? dao.selectAll() : query.apply(dao);
+        return rows.stream()
+                .map(this::toEntity)
+                .collect(Collectors.toList());
     }
 
     /**

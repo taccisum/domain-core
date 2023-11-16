@@ -3,6 +3,8 @@ package com.github.taccisum.domain.core;
 import lombok.extern.slf4j.Slf4j;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
+import java.lang.reflect.Type;
+
 /**
  * 领域事件发布者
  *
@@ -28,9 +30,13 @@ public interface EventPublisher {
 
         @Override
         public void publish(Event event) {
-            Class type = (Class) ((ParameterizedTypeImpl) event.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-            if (!type.isAssignableFrom(this.getClass())) {
-                log.warn("Publisher '{}' is not matched event '{}'. Expected publisher type of this event is '{}'", this.getClass().getName(), event.getClass().getName(), type.getName());
+            Type gsType = event.getClass().getGenericSuperclass();
+            if (gsType instanceof ParameterizedTypeImpl) {
+                Class<?> type = (Class<?>) ((ParameterizedTypeImpl) gsType).getActualTypeArguments()[0];
+
+                if (!type.isAssignableFrom(this.getClass())) {
+                    log.warn("Publisher '{}' is not matched event '{}'. Expected publisher type of this event is '{}'", this.getClass().getName(), event.getClass().getName(), type.getName());
+                }
             }
 
             event.setPublisher(this);

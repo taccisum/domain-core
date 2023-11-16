@@ -1,6 +1,7 @@
 package com.github.taccisum.domain.core;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @param <T> 此 DAO 管理的数据对象类型
@@ -31,6 +32,11 @@ public interface DAO<T extends DataObject<?>> {
     T selectById(Serializable id);
 
     /**
+     * @return 所有数据
+     */
+    List<T> selectAll();
+
+    /**
      * 根据 id 更新数据
      *
      * @param data 数据对象
@@ -38,7 +44,7 @@ public interface DAO<T extends DataObject<?>> {
     void updateById(T data);
 
     /**
-     * @return 新建的空的 DO 实例
+     * @return 新建一个空的 Data Object 实例
      */
     T newEmptyDataObject();
 }
