@@ -19,6 +19,7 @@ import java.util.List;
  * @since 0.5
  */
 public class ExtensibleFactory implements Factory {
+    // TODO:: 即有 dependenciesManager 又有 applicationContext 是否有些多些一举
     private DependenciesManager dependenciesManager;
     private PluginManager pluginManager;
     private ApplicationContext applicationContext;
