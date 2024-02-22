@@ -7,6 +7,7 @@ import com.github.taccisum.domain.core.exception.ErrorCodeMapping;
 import com.github.taccisum.domain.core.exception.ErrorCodeService;
 import com.github.taccisum.domain.core.plugin.ExtensibleFactory;
 import com.github.taccisum.domain.core.spring.FactoryAspect;
+import com.github.taccisum.domain.core.utils.DictUtils;
 import com.github.taccisum.domain.core.utils.SpringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,9 @@ public class DomainCoreAutoConfiguration implements InitializingBean {
     @Bean
     @ConditionalOnMissingBean
     public Dict domainDict(@Autowired(required = false) List<SimpleDict.DataInitializer> initializers) {
-        return new SimpleDict(initializers);
+        SimpleDict dict = new SimpleDict(initializers);
+        DictUtils.setDict(dict);
+        return dict;
     }
 
     @Override
