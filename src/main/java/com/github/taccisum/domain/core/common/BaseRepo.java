@@ -26,6 +26,10 @@ public abstract class BaseRepo<E extends Entity<?>, DO extends DataObject<?>> {
         this.dao = dao;
     }
 
+    public DAO<DO> getDao() {
+        return this.dao;
+    }
+
     /**
      * @param data Data object of entity
      * @return New created entity
