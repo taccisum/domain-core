@@ -9,6 +9,7 @@ import com.github.taccisum.domain.core.plugin.ExtensibleFactory;
 import com.github.taccisum.domain.core.spring.FactoryAspect;
 import com.github.taccisum.domain.core.utils.DictUtils;
 import com.github.taccisum.domain.core.utils.SpringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -17,12 +18,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import javax.annotation.Resource;
+import java.util.Collection;
 import java.util.List;
 
 /**
  * @author taccisum - liaojinfeng6938@dingtalk.com
  * @since 2021-11-17
  */
+@Slf4j
 @Import(FactoryAspect.class)
 public class DomainCoreAutoConfiguration implements InitializingBean {
     @Resource
@@ -47,6 +50,21 @@ public class DomainCoreAutoConfiguration implements InitializingBean {
             @Override
             public <T> T findOne(Class<T> clazz) {
                 return context.getBean(clazz);
+            }
+
+            @Override
+            public <T> T tryFindOne(Class<T> clazz) {
+                Collection<T> beans = context.getBeansOfType(clazz).values();
+                if (beans.isEmpty()) {
+                    log.warn("No any beans of class {} found. Please ensure it won't cause error by yourself.", clazz.getName());
+                    return null;
+                }
+                T first = beans.iterator().next();
+                if (beans.size() > 1) {
+                    log.warn("Found {} beans of class {}. Would use first one({}) by default. Please ensure it won't cause error by yourself.",
+                            beans.size(), clazz.getName(), first);
+                }
+                return first;
             }
         };
     }

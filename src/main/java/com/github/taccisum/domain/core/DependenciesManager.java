@@ -8,4 +8,11 @@ package com.github.taccisum.domain.core;
  */
 public interface DependenciesManager {
     <T> T findOne(Class<T> clazz);
+
+    /**
+     * Try best to find one available bean. Or null if not exist
+     *
+     * @since 0.6
+     */
+    <T> T tryFindOne(Class<T> clazz);
 }
