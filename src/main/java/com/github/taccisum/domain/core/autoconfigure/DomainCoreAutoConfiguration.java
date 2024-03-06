@@ -56,13 +56,13 @@ public class DomainCoreAutoConfiguration implements InitializingBean {
             public <T> T tryFindOne(Class<T> clazz) {
                 Collection<T> beans = context.getBeansOfType(clazz).values();
                 if (beans.isEmpty()) {
-                    log.warn("No any beans of class {} found. Please ensure it won't cause error by yourself.", clazz.getName());
+//                    log.warn("No any beans of class {} found. Please ensure it won't cause error by yourself.", clazz.getName());
                     return null;
                 }
                 T first = beans.iterator().next();
                 if (beans.size() > 1) {
-                    log.warn("Found {} beans of class {}. Would use first one({}) by default. Please ensure it won't cause error by yourself.",
-                            beans.size(), clazz.getName(), first);
+//                    log.warn("Found {} beans of class {}. Would use first one({}) by default. Please ensure it won't cause error by yourself.",
+//                            beans.size(), clazz.getName(), first);
                 }
                 return first;
             }
