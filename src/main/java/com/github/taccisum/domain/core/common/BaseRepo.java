@@ -4,9 +4,11 @@ import com.github.taccisum.domain.core.DAO;
 import com.github.taccisum.domain.core.DataObject;
 import com.github.taccisum.domain.core.DomainException;
 import com.github.taccisum.domain.core.Entity;
+import com.github.taccisum.domain.core.data.CreatedAtProperty;
 import com.github.taccisum.domain.core.exception.annotation.ErrorCode;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -36,6 +38,9 @@ public abstract class BaseRepo<E extends Entity<?>, DO extends DataObject<?>> {
      * @throws CreateException Fail to create and persist new entity
      */
     public E create(DO data) throws CreateException {
+        if (data instanceof CreatedAtProperty) {
+            ((CreatedAtProperty) data).setCreatedAt(new Date());
+        }
         dao.insert(data);
         if (data.getId() == null) {
             throw new IllegalStateException("Must provide an identity for new entity.");
