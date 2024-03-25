@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,7 +25,6 @@ import java.util.List;
  * @since 2021-11-17
  */
 @Slf4j
-@Import(FactoryAspect.class)
 public class DomainCoreAutoConfiguration implements InitializingBean {
     @Resource
     private ApplicationContext context;
@@ -41,6 +39,12 @@ public class DomainCoreAutoConfiguration implements InitializingBean {
         ErrorCodeService bean = new ErrorCodeService("app");
         bean.setErrorCodeMapping(mapping);
         return bean;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public FactoryAspect factoryAspect() {
+        return new FactoryAspect();
     }
 
     @Bean

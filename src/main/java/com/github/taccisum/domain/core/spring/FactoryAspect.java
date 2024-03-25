@@ -3,6 +3,7 @@ package com.github.taccisum.domain.core.spring;
 import com.github.taccisum.domain.core.EventBus;
 import com.github.taccisum.domain.core.EventBusAware;
 import com.github.taccisum.domain.core.utils.SpringUtils;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -25,6 +26,7 @@ public class FactoryAspect {
     /**
      * 是否启用传统的扫描注解进行注入的模式（比较低效）
      */
+    @Setter
     private boolean legacyInjectEnabled = false;
 
     @Pointcut("target(com.github.taccisum.domain.core.Factory)")
