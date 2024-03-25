@@ -108,6 +108,19 @@ public class ExtensibleFactoryTest {
         }).isInstanceOf(NullPointerException.class).hasMessage("type");
     }
 
+    @Test
+    public void findClass() {
+        extensibleFactory.setApplicationContext(applicationContext);
+        HashMap<String, FooFactory> factories = new HashMap<>();
+        factories.put("a", new Foo.Factory());
+        when(applicationContext.getBeansOfType(FooFactory.class)).thenReturn(factories);
+        FooDO data = new FooDO();
+        data.setId(1L);
+        Class<? extends Foo> clazz = extensibleFactory.findClass(data.getId(), data, FooFactory.class);
+        assertThat(clazz).isNotNull();
+        assertThat(clazz).isEqualTo(Foo.class);
+    }
+
     @Data
     private static class FooDO implements DataObject<Long> {
         private Long id;

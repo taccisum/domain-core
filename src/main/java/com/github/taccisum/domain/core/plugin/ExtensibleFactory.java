@@ -65,6 +65,28 @@ public class ExtensibleFactory implements Factory {
         throw new NoSuitableFactoryFoundException(id, criteria, type);
     }
 
+    public <ID extends Serializable, E extends Entity<ID>, C, F extends EntityFactory<ID, E, C>>
+    Class<? extends E> findClass(ID id, C criteria, Class<F> type) {
+        List<F> factories = this.listFactoriesOfType(type, true);
+        F f0 = null;
+        for (F f : factories) {
+            if (f.match(id, criteria)) {
+                f0 = f;
+                break;
+            }
+        }
+
+        final F factory = f0;
+        if (factory != null) {
+            E e = factory.create(id, criteria);
+            if (e != null) {
+                // TODO:: cache
+                return (Class<? extends E>) e.getClass();
+            }
+        }
+        return null;
+    }
+
     <E extends Entity<?>> void init(E e) {
         if (e instanceof DependenciesAware) {
             ((DependenciesAware) e).inject(dependenciesManager);
@@ -85,11 +107,6 @@ public class ExtensibleFactory implements Factory {
             factories.sort(Comparator.comparingInt(EntityFactory::getOrder));
         }
         return factories;
-    }
-
-    public <ID extends Serializable, E extends Entity<ID>, C, F extends EntityFactory<ID, E, C>>
-    Class<? extends E> findClass(ID id, C criteria, Class<F> type) {
-        return null;
     }
 
     @ErrorCode(value = "FACTORY", inherited = true)
