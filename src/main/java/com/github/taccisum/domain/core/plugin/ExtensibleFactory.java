@@ -46,16 +46,8 @@ public class ExtensibleFactory implements Factory {
      */
     public <ID extends Serializable, E extends Entity<ID>, C, F extends EntityFactory<ID, E, C>>
     E create(@NonNull ID id, C criteria, @NonNull Class<F> type) {
-        List<F> factories = new ArrayList<>();
-        if (this.pluginManager != null) {
-            factories.addAll(pluginManager.getExtensions(type));
-        }
-        if (this.applicationContext != null) {
-            factories.addAll(applicationContext.getBeansOfType(type).values());
-        }
-        // TODO:: should cache ordered result for perf optimization.
+        List<F> factories = this.listFactoriesOfType(type, true);
         F f0 = null;
-        factories.sort(Comparator.comparingInt(EntityFactory::getOrder));
         for (F f : factories) {
             if (f.match(id, criteria)) {
                 f0 = f;
@@ -66,13 +58,38 @@ public class ExtensibleFactory implements Factory {
         final F factory = f0;
         if (factory != null) {
             E e = factory.create(id, criteria);
-            if (e instanceof DependenciesAware) {
-                ((DependenciesAware) e).inject(dependenciesManager);
-            }
+            this.init(e);
             return e;
         }
 
         throw new NoSuitableFactoryFoundException(id, criteria, type);
+    }
+
+    <E extends Entity<?>> void init(E e) {
+        if (e instanceof DependenciesAware) {
+            ((DependenciesAware) e).inject(dependenciesManager);
+        }
+    }
+
+    private <ID extends Serializable, E extends Entity<ID>, C, F extends EntityFactory<ID, E, C>>
+    List<F> listFactoriesOfType(Class<F> type, boolean sorted) {
+        List<F> factories = new ArrayList<>();
+        if (this.pluginManager != null) {
+            factories.addAll(pluginManager.getExtensions(type));
+        }
+        if (this.applicationContext != null) {
+            factories.addAll(applicationContext.getBeansOfType(type).values());
+        }
+        if (sorted) {
+            // TODO:: should cache ordered result for perf optimization.
+            factories.sort(Comparator.comparingInt(EntityFactory::getOrder));
+        }
+        return factories;
+    }
+
+    public <ID extends Serializable, E extends Entity<ID>, C, F extends EntityFactory<ID, E, C>>
+    Class<? extends E> findClass(ID id, C criteria, Class<F> type) {
+        return null;
     }
 
     @ErrorCode(value = "FACTORY", inherited = true)
