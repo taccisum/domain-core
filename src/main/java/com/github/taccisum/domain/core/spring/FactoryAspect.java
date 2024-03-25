@@ -22,6 +22,11 @@ public class FactoryAspect {
     @Autowired(required = false)
     private EventBus eventBus;
 
+    /**
+     * 是否启用传统的扫描注解进行注入的模式（比较低效）
+     */
+    private boolean legacyInjectEnabled = false;
+
     @Pointcut("target(com.github.taccisum.domain.core.Factory)")
     public void factoryMethods() {
     }
@@ -33,6 +38,8 @@ public class FactoryAspect {
     public Object setEventBus(ProceedingJoinPoint point) throws Throwable {
         Object result = point.proceed();
 
+        if (result == null) return null;
+
         if (eventBus != null) {
             if (result instanceof EventBusAware) {
                 log.debug("Inject EventBus '{}' into '{}'", eventBus, result);
@@ -43,8 +50,11 @@ public class FactoryAspect {
             }
         }
 
-        log.debug("Inject Spring Beans into '{}'", result);
-        SpringUtils.inject(result);
+        // TODO:: Legacy: should be remove
+        if (legacyInjectEnabled) {
+            log.debug("Inject Spring Beans into '{}'", result);
+            SpringUtils.inject(result);
+        }
 
         return result;
     }
