@@ -6,6 +6,7 @@ import com.github.taccisum.domain.core.Entity;
 import com.github.taccisum.domain.core.Factory;
 import com.github.taccisum.domain.core.exception.annotation.ErrorCode;
 import lombok.Getter;
+import lombok.NonNull;
 import org.pf4j.PluginManager;
 import org.springframework.context.ApplicationContext;
 
@@ -21,8 +22,8 @@ import java.util.List;
 public class ExtensibleFactory implements Factory {
     // TODO:: 即有 dependenciesManager 又有 applicationContext 是否有些多些一举
     private DependenciesManager dependenciesManager;
-    private PluginManager pluginManager;
-    private ApplicationContext applicationContext;
+    PluginManager pluginManager;
+    ApplicationContext applicationContext;
 
     public ExtensibleFactory(DependenciesManager dependenciesManager) {
         this.dependenciesManager = dependenciesManager;
@@ -44,7 +45,7 @@ public class ExtensibleFactory implements Factory {
      * @param type     实体工厂类型
      */
     public <ID extends Serializable, E extends Entity<ID>, C, F extends EntityFactory<ID, E, C>>
-    E create(ID id, C criteria, Class<F> type) {
+    E create(@NonNull ID id, C criteria, @NonNull Class<F> type) {
         List<F> factories = new ArrayList<>();
         if (this.pluginManager != null) {
             factories.addAll(pluginManager.getExtensions(type));
