@@ -4,7 +4,6 @@ import com.github.taccisum.domain.core.DependenciesAware;
 import com.github.taccisum.domain.core.DependenciesManager;
 import com.github.taccisum.domain.core.Entity;
 import com.github.taccisum.domain.core.Factory;
-import com.github.taccisum.domain.core.exception.annotation.ErrorCode;
 import lombok.Getter;
 import lombok.NonNull;
 import org.pf4j.PluginManager;
@@ -109,7 +108,6 @@ public class ExtensibleFactory implements Factory {
         return factories;
     }
 
-    @ErrorCode(value = "FACTORY", inherited = true)
     public static class FactoryExtensionsException extends UnsupportedExtensionsException {
         @Getter
         protected Object id;
@@ -131,7 +129,6 @@ public class ExtensibleFactory implements Factory {
         }
     }
 
-    @ErrorCode(value = "NO_SUITABLE", inherited = true)
     public static class NoSuitableFactoryFoundException extends FactoryExtensionsException {
         public NoSuitableFactoryFoundException(Object id, Object criteria, Class<? extends EntityFactory> type) {
             super(id, criteria, type);
