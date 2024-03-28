@@ -54,7 +54,7 @@ public class FactoryAspect {
 
         // TODO:: Legacy: should be remove
         if (legacyInjectEnabled) {
-            log.debug("Inject Spring Beans into '{}'", result);
+            log.debug("[Legacy] Inject Spring Beans into '{}'", result);
             SpringUtils.inject(result);
         }
 

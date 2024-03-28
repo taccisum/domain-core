@@ -13,4 +13,9 @@ public interface EventBus {
      * @param event 领域事件
      */
     void post(Event event);
+
+    /**
+     * @since 2024-03-28
+     */
+    void register(EventSubscriber subscriber);
 }
