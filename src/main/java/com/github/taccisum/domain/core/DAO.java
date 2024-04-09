@@ -47,4 +47,21 @@ public interface DAO<T extends DataObject<?>> {
      * @return 新建一个空的 Data Object 实例
      */
     T newEmptyDataObject();
+
+    interface Readonly<T extends DataObject<?>> extends DAO<T> {
+        @Override
+        default <ID extends Serializable> ID insert(T data) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        default void deleteById(Serializable id) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        default void updateById(T data) {
+            throw new UnsupportedOperationException();
+        }
+    }
 }
