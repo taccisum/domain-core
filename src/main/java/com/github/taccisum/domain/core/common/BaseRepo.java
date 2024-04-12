@@ -5,6 +5,7 @@ import com.github.taccisum.domain.core.DataObject;
 import com.github.taccisum.domain.core.DomainException;
 import com.github.taccisum.domain.core.Entity;
 import com.github.taccisum.domain.core.data.CreatedAtProperty;
+import com.github.taccisum.domain.core.data.StatusProperty;
 import com.github.taccisum.domain.core.exception.annotation.ErrorCode;
 
 import java.io.Serializable;
@@ -40,6 +41,10 @@ public abstract class BaseRepo<E extends Entity<?>, DO extends DataObject<?>> {
     public E create(DO data) throws CreateException {
         if (data instanceof CreatedAtProperty) {
             ((CreatedAtProperty) data).setCreatedAt(new Date());
+        }
+        if (data instanceof StatusProperty) {
+            StatusProperty s = (StatusProperty) data;
+            if (s.getStatus() == null) s.setStatus(0);
         }
         dao.insert(data);
         if (data.getId() == null) {

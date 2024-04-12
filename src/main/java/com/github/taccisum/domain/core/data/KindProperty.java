@@ -13,7 +13,7 @@ public interface KindProperty {
     Integer getKind();
 
     /**
-     * @param kind Kine of its relevant entity
+     * @param kind Kind of its relevant entity
      */
     void setKind(Integer kind);
 }
