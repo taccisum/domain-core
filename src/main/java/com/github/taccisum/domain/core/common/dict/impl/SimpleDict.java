@@ -18,6 +18,10 @@ public class SimpleDict implements Dict {
     private final Map<String, SimpleNamespace> namespaces = new ConcurrentHashMap<>();
     private final Map<String, Item> items = new ConcurrentHashMap<>();
 
+    public SimpleDict() {
+        this(null);
+    }
+
     public SimpleDict(List<DataInitializer> initializers) {
         if (initializers != null) {
             for (DataInitializer initializer : initializers) {

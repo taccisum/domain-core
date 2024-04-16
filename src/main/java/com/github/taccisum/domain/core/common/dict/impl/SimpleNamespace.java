@@ -27,18 +27,22 @@ public class SimpleNamespace implements Dict.Namespace {
         if (items.containsKey(this.getFullKey(code))) {
             return items.get(this.getFullKey(code));
         }
-        throw new RuntimeException();   // TODO::
+        return null;
     }
 
     @Override
     public Dict.Item of(int val) {
         // TODO:: optimize
-        for (Dict.Item item : dict.getItems().values()) {
-            if (item.val() == val) {
-                return item;
+        for (String key : dict.getItems().keySet()) {
+            if (key.startsWith(String.format("%s.", this.key))) {
+                Dict.Item item = dict.getItems().get(key);
+                if (item.val() == val) {
+                    return item;
+                }
             }
         }
-        throw new RuntimeException();   // TODO::
+
+        return null;
     }
 
     private String getFullKey(String code) {

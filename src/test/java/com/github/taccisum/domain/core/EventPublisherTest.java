@@ -19,7 +19,16 @@ public class EventPublisherTest {
     public void index() {
         capture.reset();
         Pub pub = new Pub();
-        pub.setEventBus(event -> System.out.println("event public success."));
+        pub.setEventBus(new EventBus() {
+            @Override
+            public void post(Event event) {
+                System.out.println("event public success.");
+            }
+
+            @Override
+            public void register(EventSubscriber subscriber) {
+            }
+        });
         Event.Base<Pub> event = new Event.Base<Pub>() {
         };
         pub.publish(event);
