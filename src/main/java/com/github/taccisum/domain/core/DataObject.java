@@ -3,6 +3,7 @@ package com.github.taccisum.domain.core;
 import lombok.Getter;
 
 import java.io.Serializable;
+import java.util.function.Consumer;
 
 /**
  * Mark a class that implemented this interface a data object
@@ -21,12 +22,19 @@ public interface DataObject<ID extends Serializable> {
      */
     void setId(ID id);
 
-    class Wrapper<DO extends DataObject<?>> {
+    abstract class Wrapper<DO extends DataObject<?>> {
         @Getter
         private DO data;
 
         public Wrapper(DO data) {
             this.data = data;
+        }
+
+        /**
+         * Set up data fields directly
+         */
+        public void set(Consumer<DO> consumer) {
+            consumer.accept(this.getData());
         }
     }
 }

@@ -27,7 +27,10 @@ public abstract class VarietyEntity<ID extends Serializable, DO extends DataObje
     public abstract DataObject.Wrapper<DO> newDataWrapper();
 
     public void save(DataObject.Wrapper<DO> dw) {
-        DO o = dw.getData();
+        this.save(dw.getData());
+    }
+
+    protected void save(DO o) {
         if (o.getId() == null) {
             o.setId(this.id());
         }
