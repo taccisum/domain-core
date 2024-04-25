@@ -1,5 +1,7 @@
 package com.github.taccisum.domain.core;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
@@ -18,4 +20,13 @@ public interface DataObject<ID extends Serializable> {
      * @param id Unique of relevant entity
      */
     void setId(ID id);
+
+    class Wrapper<DO extends DataObject<?>> {
+        @Getter
+        private DO data;
+
+        public Wrapper(DO data) {
+            this.data = data;
+        }
+    }
 }
