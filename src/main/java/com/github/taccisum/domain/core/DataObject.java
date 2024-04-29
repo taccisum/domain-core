@@ -24,7 +24,7 @@ public interface DataObject<ID extends Serializable> {
 
     abstract class Wrapper<DO extends DataObject<?>> {
         @Getter
-        private DO data;
+        protected DO data;
 
         public Wrapper(DO data) {
             this.data = data;
