@@ -61,13 +61,20 @@ public abstract class BaseRepo<E extends Entity<?>, DO extends DataObject<?>> {
      */
     public <T extends E> T create(DO data, Class<T> clazz) throws CreateException {
         E e = this.create(data);
-        if (e.getClass().isAssignableFrom(clazz)) {
+        if (canCast(e, clazz)) {
             return (T) e;
         }
         throw new CreateException(
                 String.format("Real entity class %s doesn't match expected class %s.",
                         e.getClass(), clazz)
         );
+    }
+
+    /**
+     * @return Does the entity can be cast to target clazz
+     */
+    <T extends E> boolean canCast(E e, Class<T> targetClazz) {
+        return targetClazz.isAssignableFrom(e.getClass());
     }
 
     /**
