@@ -71,13 +71,6 @@ public abstract class BaseRepo<E extends Entity<?>, DO extends DataObject<?>> {
     }
 
     /**
-     * @return Does the entity can be cast to target clazz
-     */
-    <T extends E> boolean canCast(E e, Class<T> targetClazz) {
-        return targetClazz.isAssignableFrom(e.getClass());
-    }
-
-    /**
      * Find the entity by identity
      *
      * @param id Entity unique identity
@@ -94,10 +87,10 @@ public abstract class BaseRepo<E extends Entity<?>, DO extends DataObject<?>> {
      * @param clazz Expected class of entity
      * @return Entity object or null(if data not found or class not match)
      */
-    public <T> Optional<T> getById(Serializable id, Class<T> clazz) {
+    public <T extends E> Optional<T> getById(Serializable id, Class<T> clazz) {
         return this.getById(id)
                 .map(it -> {
-                    if (!it.getClass().isAssignableFrom(clazz)) return null;
+                    if (!canCast(it, clazz)) return null;
                     return (T) it;
                 });
     }
@@ -132,6 +125,13 @@ public abstract class BaseRepo<E extends Entity<?>, DO extends DataObject<?>> {
      * @return The entity relates to the given data object
      */
     protected abstract E toEntity(DO data);
+
+    /**
+     * @return Does the entity can be cast to target clazz
+     */
+    <T extends E> boolean canCast(E e, Class<T> targetClazz) {
+        return targetClazz.isAssignableFrom(e.getClass());
+    }
 
     @ErrorCode(value = "ENTITY.CREATE", description = "创建实体失败")
     public static class CreateException extends DomainException {
