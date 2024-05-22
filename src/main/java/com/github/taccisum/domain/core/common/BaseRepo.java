@@ -2,11 +2,9 @@ package com.github.taccisum.domain.core.common;
 
 import com.github.taccisum.domain.core.DAO;
 import com.github.taccisum.domain.core.DataObject;
-import com.github.taccisum.domain.core.DomainException;
 import com.github.taccisum.domain.core.Entity;
 import com.github.taccisum.domain.core.data.CreatedAtProperty;
 import com.github.taccisum.domain.core.data.StatusProperty;
-import com.github.taccisum.domain.core.exception.annotation.ErrorCode;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -133,8 +131,7 @@ public abstract class BaseRepo<E extends Entity<?>, DO extends DataObject<?>> {
         return targetClazz.isAssignableFrom(e.getClass());
     }
 
-    @ErrorCode(value = "ENTITY.CREATE", description = "创建实体失败")
-    public static class CreateException extends DomainException {
+    public static class CreateException extends RuntimeException {
         public CreateException(String message) {
             super(message);
         }
