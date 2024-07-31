@@ -4,6 +4,7 @@ import com.github.taccisum.domain.core.DAO;
 import com.github.taccisum.domain.core.DataObject;
 import com.github.taccisum.domain.core.Entity;
 import com.github.taccisum.domain.core.data.CreatedAtProperty;
+import com.github.taccisum.domain.core.data.EnabledProperty;
 import com.github.taccisum.domain.core.data.StatusProperty;
 
 import java.io.Serializable;
@@ -43,6 +44,10 @@ public abstract class BaseRepo<E extends Entity<?>, DO extends DataObject<?>> {
         if (data instanceof StatusProperty) {
             StatusProperty s = (StatusProperty) data;
             if (s.getStatus() == null) s.setStatus(0);
+        }
+        if (data instanceof EnabledProperty) {
+            EnabledProperty s = (EnabledProperty) data;
+            if (s.getEnabled() == null) s.setEnabled(true);
         }
         dao.insert(data);
         if (data.getId() == null) {
